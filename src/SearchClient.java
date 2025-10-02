@@ -1,7 +1,10 @@
 import java.io.*;
 import java.util.*;
 // Name: Kobe Lei
-// Date: 9/28/2025
+// Date: 9/1/2025
+// CSE 123
+// P0: Search Engine
+// TA: Sumaya
 
 // This class allows users to find and rate books within BOOK_DIRECTORY
 // containing certain terms
@@ -39,24 +42,53 @@ public class SearchClient {
         System.out.println("See you next time!");
     }
 
+    // Creates an inverted index from the given list of media documents.
+    //
+    // Behavior:
+    // The index maps a unique lowercase word (token) from any media content to
+    // the set of Media objects that contain that word.
+    // It handles null inputs by skipping them.
+    //
+    // Parameters:
+    // docs - The list of Media objects to be indexed.
+    //
+    // Returns:
+    // A Map with the inverted index, where keys are tokens (String)
+    // and values are the set of matching Media objects (Set<Media>). Returns
+    // an empty Map if docs is null.
     public static Map<String, Set<Media>> createIndex(List<Media> docs) {
         Map<String, Set<Media>> index = new TreeMap<>();
-        if (docs == null) return index;
+        if (docs != null) {
+            for (Media media : docs) {
+                if (media != null) {
+                    List<String> tokens = media.getContent();
+                    if (tokens != null) {
+                        for (String token : tokens) {
+                            if (token != null) {
+                                String key = token.toLowerCase(Locale.ROOT);
 
-        for (Media media : docs) {
-            if (media == null) continue;
-            List<String> tokens = media.getContent();
-            if (tokens == null) continue;
-
-            for (String token : tokens) {
-                if (token == null) continue;
-                String key = token.toLowerCase(Locale.ROOT);
-                index.computeIfAbsent(key, k -> new HashSet<>()).add(media);
+                                if (!index.containsKey(key)) {
+                                    index.put(key, new HashSet<>());
+                                }
+                                index.get(key).add(media);
+                            }
+                        }
+                    }
+                }
             }
         }
         return index;
     }
-
+    // Searches the given inverted index for all Media documents that contain any of the
+    // words in the query string.
+    //
+    // Parameters:
+    // index - The inverted index mapping terms to the Set of media containing those terms.
+    // query - The string containing one or more space-separated terms to search for.
+    //
+    // Returns:
+    // A set of Media objects that contain at least one of the query terms. Returns an
+    // empty set if index is null, query is null/blank, or no matches are found.
     public static Set<Media> search(Map<String, Set<Media>> index, String query) {
         Set<Media> results = new TreeSet<>();
         if (index == null || query == null || query.isBlank()) return results;
@@ -70,7 +102,7 @@ public class SearchClient {
         return results;
     }
 
-    // Allows the user to search a specific query using the provided 'index' to find appropraite
+    // Allows the user to search a specific query using the provided 'index' to find appropriate
     //  Media entries.
     //
     // Parameters:

@@ -2,6 +2,13 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 
+// Name: Kobe Lei
+// Date: 9/28/2025
+// CSE 123
+// Assignment: P0: Search Engine
+// TA: Sumaya
+// This class sets up JUnit testing and helps verify multiple functions from the Search Engine is
+// functioning as it should be.
 public class Testing {
 
     @Test
