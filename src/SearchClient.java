@@ -83,7 +83,7 @@ public class SearchClient {
         String query = console.nextLine();
 
         Set<Media> result = search(index, query);
-        
+
         if (result.isEmpty()) {
             System.out.println("\tNo results!");
         } else {
@@ -124,7 +124,7 @@ public class SearchClient {
     //   A list of all book objects corresponding to the ones located in BOOK_DIRECTORY
     public static List<Media> loadBooks() throws FileNotFoundException {
         List<Media> ret = new ArrayList<>();
-        
+
         File dir = new File(BOOK_DIRECTORY);
         for (File f : dir.listFiles()) {
             Scanner sc = new Scanner(f, "utf-8");
@@ -137,7 +137,7 @@ public class SearchClient {
             // Feel free to comment this out.
             int minRating = RAND.nextInt(MAX_RATING - MIN_RATING + 1) + MIN_RATING;
             addRatings(minRating, Math.min(MAX_RATING,RAND.nextInt(MAX_RATING - minRating + 1) + minRating),
-                        RAND.nextInt(MAX_NUM_RATINGS - MIN_NUM_RATINGS) + MIN_NUM_RATINGS, book);
+                    RAND.nextInt(MAX_NUM_RATINGS - MIN_NUM_RATINGS) + MIN_NUM_RATINGS, book);
             ret.add(book);
         }
 

@@ -18,7 +18,7 @@ public class Book implements Media, Comparable<Book> {
             throw new IllegalArgumentException("authors cannot be null or empty");
         }
         this.title = title;
-        this.authors = Collections.unmodifiableList(new ArrayList<>(authors));
+        this.authors = new ArrayList<>(authors);
         this.contentTokens = new ArrayList<>();
         if (content != null) {
             while (content.hasNext()) {
@@ -63,7 +63,7 @@ public class Book implements Media, Comparable<Book> {
 
     @Override
     public List<String> getContent() {
-        return Collections.unmodifiableList(this.contentTokens);
+        return this.contentTokens;
     }
 
     @Override
@@ -73,12 +73,12 @@ public class Book implements Media, Comparable<Book> {
         sb.append(" by ");
         sb.append(this.authors.toString());
         if (this.ratingCount > 0) {
-            DecimalFormat df = new DecimalFormat("0.##");
+            DecimalFormat df = new DecimalFormat("0.00");
             sb.append(": ");
             sb.append(df.format(getAverageRating()));
             sb.append(" (");
             sb.append(this.ratingCount);
-            sb.append(this.ratingCount == 1 ? " rating)" : " ratings)");
+            sb.append(" ratings)");
         }
         return sb.toString();
     }
@@ -88,18 +88,15 @@ public class Book implements Media, Comparable<Book> {
         if (other == null) {
             return -1;
         }
-        int cmp;
+        int comparision;
 
-        double aAvg = this.getAverageRating();
-        double bAvg = other.getAverageRating();
-        cmp = Double.compare(bAvg, aAvg);
-        if (cmp != 0) return cmp;
+        double aAvgRating = this.getAverageRating();
+        double bAvgRating = other.getAverageRating();
+        comparision = Double.compare(bAvgRating, aAvgRating);
+        if (comparision != 0) return comparision;
 
-        cmp = Integer.compare(other.getNumRatings(), this.getNumRatings());
-        if (cmp != 0) return cmp;
-
-        cmp = this.title.compareToIgnoreCase(other.title);
-        if (cmp != 0) return cmp;
+        comparision = Integer.compare(other.getNumRatings(), this.getNumRatings());
+        if (comparision != 0) return comparision;
 
         return Integer.compare(this.authors.size(), other.authors.size());
     }

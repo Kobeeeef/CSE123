@@ -23,7 +23,7 @@ public class Testing {
     @DisplayName("getNumRatings")
     public void testNumRatings() {
         Book book = new Book("Title", List.of("Author"), new Scanner("Content"));
-        
+
         assertEquals(0, book.getNumRatings());
 
         book.addRating(1);
@@ -33,7 +33,7 @@ public class Testing {
         book.addRating(1);
 
         assertEquals(2, book.getNumRatings());
-        
+
     }
 
     @Test
@@ -50,19 +50,19 @@ public class Testing {
         book.addRating(5);
 
         assertEquals(4.5, book.getAverageRating());
-        
+
     }
 
     @Test
     @DisplayName("createIndex tests")
     public void testInvertedIndex() {
         Book mistborn = new Book("Mistborn", List.of("Brandon Sanderson"),
-                                 new Scanner("Epic fantasy worldbuildling content"));
+                new Scanner("Epic fantasy worldbuildling content"));
         Book farenheit = new Book("Farenheit 451", List.of("Ray Bradbury"),
-                                  new Scanner("Realistic \"sci-fi\" content"));
+                new Scanner("Realistic \"sci-fi\" content"));
         Book hobbit = new Book("The Hobbit", List.of("J.R.R. Tolkein"),
-                               new Scanner("Epic fantasy quest content"));
-        
+                new Scanner("Epic fantasy quest content"));
+
         List<Media> books = List.of(mistborn, farenheit, hobbit);
         Map<String, Set<Media>> index = SearchClient.createIndex(books);
 

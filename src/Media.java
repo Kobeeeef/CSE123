@@ -4,7 +4,7 @@ import java.util.*;
  * An interface to represent various types of media (movies, books, tv shows, songs, etc.).
  */
 public interface Media {
-    
+
     /**
      * Gets the title of this media.
      *
@@ -49,17 +49,17 @@ public interface Media {
     public List<String> getContent();
 
     /**
-    * Produce a readable string representation. of this media
-    *
-    * If the media has zero ratings, the format will be:
-    * "<title> by [<artists>]"
-    * 
-    * If the media has at least one review, the format will be:
-    * "<title> by [<artists>]: <average rating> (<num ratings> ratings)"
-    *
-    * The average rating displayed will be rounded to at most two decimal places.
-    *
-    * @ returns     The appropriately formatted string representation
-    */
+     * Produce a readable string representation. of this media
+     *
+     * If the media has zero ratings, the format will be:
+     * "<title> by [<artists>]"
+     *
+     * If the media has at least one review, the format will be:
+     * "<title> by [<artists>]: <average rating> (<num ratings> ratings)"
+     *
+     * The average rating displayed will be rounded to at most two decimal places.
+     *
+     * @ returns     The appropriately formatted string representation
+     */
     public String toString();
 }
